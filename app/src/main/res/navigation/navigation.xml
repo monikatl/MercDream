@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loggingFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.baszczyk.mercdream.home.HomeFragment"
+        android:label="home fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_formFragment"
+            app:destination="@id/formFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formFragment"
+        android:name="com.baszczyk.mercdream.form.FormFragment"
+        android:label="FormFragment" >
+        <action
+            android:id="@+id/action_formFragment_to_piggyBankFragment"
+            app:destination="@id/piggyBankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.baszczyk.mercdream.home.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_formFragment"
+            app:destination="@id/formFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_piggyBankFragment"
+            app:destination="@id/piggyBankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loggingFragment"
+        android:name="com.baszczyk.mercdream.logging.LoggingFragment"
+        android:label="fragment_logging"
+        tools:layout="zaloguj sie" >
+        <action
+            android:id="@+id/action_loggingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loggingFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <action
+            android:id="@+id/action_loggingFragment_to_addNewUserFragment"
+            app:destination="@id/addNewUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/piggyBankFragment"
+        android:name="com.baszczyk.mercdream.piggy.PiggyBankFragment"
+        android:label="PiggyBankFragment" />
+    <fragment
+        android:id="@+id/addNewUserFragment"
+        android:name="com.baszczyk.mercdream.user.AddNewUserFragment"
+        android:label="dodawanie nowego uzytkownika"
+        tools:layout="@layout/add_new_user_fragment" >
+        <action
+            android:id="@+id/action_addNewUserFragment_to_loggingFragment"
+            app:destination="@id/loggingFragment" />
+    </fragment>
+
+</navigation>
