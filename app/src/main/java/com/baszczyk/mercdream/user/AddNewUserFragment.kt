@@ -18,7 +18,7 @@ import androidx.navigation.findNavController
 
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
-import com.baszczyk.mercdream.database.User
+import com.baszczyk.mercdream.database.enities.User
 import com.baszczyk.mercdream.databinding.AddNewUserFragmentBinding
 
 
@@ -49,7 +49,7 @@ class AddNewUserFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddNewUserViewModel::class.java)
 
-        //binding.addNewUserViewModel = viewModel
+        binding.addNewUserViewModel = viewModel
 
         newUser.addTextChangedListener(addTextWatcher)
         newPassword.addTextChangedListener(addTextWatcher)
@@ -61,13 +61,10 @@ class AddNewUserFragment : Fragment() {
             newPassword = binding.newUserPassword
             email = binding.addUserEmail
 
-            val user = User(name = newUser.text.toString(), password = newPassword.text.toString(), email = email.text.toString())
-
-            viewModel.addNewUser(user)
+            viewModel.addNewUser(createNewUser())
             viewModel.getNewUser()
 
             Handler().postDelayed({
-
 
                 Toast.makeText(
                     this.context,
@@ -78,12 +75,16 @@ class AddNewUserFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_addNewUserFragment_to_loggingFragment)
 
             }, 500)
-
         }
-
-        //binding.setLifecycleOwner(this)
-
         return binding.root
+    }
+
+    private fun createNewUser(): User{
+        return User(
+            name = newUser.text.toString(),
+            password = newPassword.text.toString(),
+            email = email.text.toString()
+        )
     }
 
     private val addTextWatcher = object : TextWatcher{
@@ -107,6 +108,5 @@ class AddNewUserFragment : Fragment() {
         }
 
     }
-
 
 }

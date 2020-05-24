@@ -3,7 +3,7 @@ package com.baszczyk.mercdream.home
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.baszczyk.mercdream.database.PiggyBank
+import com.baszczyk.mercdream.database.enities.PiggyBank
 import com.baszczyk.mercdream.database.PiggyDatabaseDao
 import kotlinx.coroutines.*
 
@@ -30,4 +30,18 @@ class ListViewModel(
             piggies.value = getAllPiggies(id)
         }
     }
+
+    private val _navigateToPiggyBankFragment = MutableLiveData<Long>()
+    val navigateToPiggyBankFragment
+        get() = _navigateToPiggyBankFragment
+
+    fun onPiggyBankClicked(id: Long) {
+        _navigateToPiggyBankFragment.value = id
+    }
+
+    fun onPiggyBankNavigated() {
+        _navigateToPiggyBankFragment.value = null
+    }
+
+
 }

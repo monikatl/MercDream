@@ -20,7 +20,7 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         Handler().postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoggingActivity::class.java))
             finish()
         }, SPLASH_TIME_OUT)
     }

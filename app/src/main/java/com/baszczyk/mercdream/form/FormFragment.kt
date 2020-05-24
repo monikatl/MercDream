@@ -1,25 +1,29 @@
 package com.baszczyk.mercdream.form
 
 
+
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 
 import com.baszczyk.mercdream.R
-import com.baszczyk.mercdream.database.Mercedes
-import com.baszczyk.mercdream.database.PiggyBank
+import com.baszczyk.mercdream.database.enities.Mercedes
+import com.baszczyk.mercdream.database.enities.PiggyBank
 import com.baszczyk.mercdream.database.PiggyDatabase
-import com.baszczyk.mercdream.database.User
+import com.baszczyk.mercdream.database.enities.User
 import com.baszczyk.mercdream.databinding.FragmentFormBinding
-import com.baszczyk.mercdream.logging.LoggingFragment
+import kotlinx.android.synthetic.main.fragment_form.*
 
 class FormFragment : Fragment() {
 
@@ -27,8 +31,7 @@ class FormFragment : Fragment() {
     lateinit var piggy: PiggyBank
     lateinit var formViewModel: FormViewModel
     lateinit var binding: FragmentFormBinding
-    lateinit var currentUser: User
-
+    lateinit var price: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,36 +49,48 @@ class FormFragment : Fragment() {
         formViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory).get(FormViewModel::class.java)
-
         binding.formViewModel = formViewModel
 
 
-
         binding.nextButton.setOnClickListener { view: View ->
-
-            createMercedes()
+            this.createMercedes()
             formViewModel.addMercedes(mercedes)
 
             Handler().postDelayed({
                 formViewModel.mercedesId()
                 Handler().postDelayed({
-                    val mercId = formViewModel.currentMercedes.value
-                    piggy = PiggyBank(mercedesId = mercId!!, userId = 1, actualAmount = mercedes.price)
+                    createPiggy()
                     formViewModel.addPiggyBank(piggy)
-                    showDialog()
-                    view.findNavController().navigate(FormFragmentDirections.actionFormFragmentToPiggyBankFragment())
-                }, 1000)
+                    Handler().postDelayed({
+                        showDialog()
+                        view.findNavController().navigate(R.id.action_formFragment_to_listFragment)
+                    }, 500)
 
-            }, 1000)
+                }, 500)
+
+            }, 500)
         }
 
-       // binding.setLifecycleOwner(this)
+       binding.setLifecycleOwner(this)
 
         return binding.root
     }
 
+    private fun createPiggy(){
+        val mercId = formViewModel.currentMercedes.value!!
+        val mercSurname = mercedes.surname
+        val userId = activity?.intent?.extras?.get("id").toString().toLong()
+        piggy = PiggyBank(
+            mercedesId = mercId,
+            piggyName = mercSurname,
+            userId = userId,
+            actualAmount = mercedes.price
+        )
+    }
+
     private fun createMercedes(){
-        mercedes = Mercedes( surname = binding.surnameInput.text.toString(),
+        mercedes = Mercedes(
+            surname = binding.surnameInput.text.toString(),
             price = binding.priceInput.text.toString().toDouble(),
             version = binding.versionInput.text.toString(),
             engineCapacity = binding.capacityInput.text.toString(),
@@ -88,7 +103,9 @@ class FormFragment : Fragment() {
         val builder: AlertDialog.Builder? = activity?.let {
             AlertDialog.Builder(it)
         }
-        builder?.setMessage("Skarbonka została pomyslnie utworzona!")
-            builder?.show()
+        builder?.setTitle("Skarbonka została pomyslnie utworzona!")
+        builder?.setPositiveButton("OK"){ dialogInterface: DialogInterface, i: Int ->
+        }
+        builder?.show()
     }
 }

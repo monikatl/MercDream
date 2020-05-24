@@ -1,30 +1,33 @@
 package com.baszczyk.mercdream.logging
 
+
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.baszczyk.mercdream.MainActivity
 
 import com.baszczyk.mercdream.R
+
 import com.baszczyk.mercdream.database.PiggyDatabase
-import com.baszczyk.mercdream.database.User
+
 import com.baszczyk.mercdream.databinding.FragmentLoggingBinding
 
 
-
 class LoggingFragment : Fragment() {
-
 
     private lateinit var viewModel: LoggingViewModel
     private lateinit var binding: FragmentLoggingBinding
@@ -60,32 +63,20 @@ class LoggingFragment : Fragment() {
             userName = binding.userName
             userPassword = binding.userPassword
 
-
             if(isUserInDatabase()){
                 viewModel.getUserPassword(userName.text.toString())
-
                 Handler().postDelayed({
                     if(isCorrectPassword()) {
-                        Toast.makeText(this.context, "Poprawne hasło", Toast.LENGTH_LONG).show()
                         viewModel.getUser(userName.text.toString())
 
                         Handler().postDelayed({
-                            viewModel.currentUser?.value!!
-                            viewModel.getAllPiggies(viewModel.currentUser.value?.userId!!)
-
-                            Handler().postDelayed({
-                               val list = viewModel.piggies
-                                if(list.isEmpty()){
-                                    view.findNavController().navigate(LoggingFragmentDirections.actionLoggingFragmentToHomeFragment())
-                                } else {
-                                    view.findNavController().navigate(LoggingFragmentDirections.actionLoggingFragmentToListFragment())
-                                }
-                            }, 500)
+                            val userId = viewModel.currentUser.value!!.userId.toString()
+                            val intent = Intent(activity, MainActivity::class.java).apply {
+                                putExtra("id", userId)
+                            }
+                            activity?.startActivity(intent)
 
                         }, 500)
-
-
-
                     } else {
                         binding.wrongData.text = "Niepoprawne hasło!"
                     }
@@ -93,18 +84,12 @@ class LoggingFragment : Fragment() {
                 }, 500)
 
             }else {
-
                 view.findNavController().navigate(R.id.action_loggingFragment_to_addNewUserFragment)
             }
-
         }
-
-
-
         binding.newUser.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_loggingFragment_to_addNewUserFragment)
         }
-
         return binding.root
     }
 
@@ -115,13 +100,12 @@ class LoggingFragment : Fragment() {
         userPassword.text.toString() == viewModel.userPassword
 
 
+
     private val loggingTextWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -131,7 +115,5 @@ class LoggingFragment : Fragment() {
             binding.loggIn.isEnabled = name.isNotEmpty() && password.isNotEmpty()
         }
     }
-
-
 
 }

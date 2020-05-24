@@ -10,10 +10,15 @@
         android:roundIcon="@drawable/mercedes_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoggingActivity"
+            android:screenOrientation="nosensor"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="nosensor"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,5 +26,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

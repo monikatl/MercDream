@@ -1,17 +1,15 @@
 package com.baszczyk.mercdream.logging
 
 import android.app.Application
-import android.service.autofill.Transformation
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
-import com.baszczyk.mercdream.database.PiggyBank
 import com.baszczyk.mercdream.database.PiggyDatabaseDao
-import com.baszczyk.mercdream.database.User
+import com.baszczyk.mercdream.database.enities.User
 import kotlinx.coroutines.*
 
 class LoggingViewModel (val database: PiggyDatabaseDao,
                         application: Application): AndroidViewModel(application) {
+
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -30,24 +28,6 @@ class LoggingViewModel (val database: PiggyDatabaseDao,
             user
         }
     }
-
-
-    lateinit var piggies: List<Long?>
-
-    fun getAllPiggies(userId: Long){
-        uiScope.launch {
-            piggies = allPiggies(userId)
-        }
-    }
-
-    private suspend fun allPiggies(userId: Long):List<Long?>{
-        return withContext(Dispatchers.IO){
-            val piggie = database.getPiggiesId(userId)
-            piggie
-        }
-    }
-
-
 
     lateinit var users: List<String>
 

@@ -7,15 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
 import com.baszczyk.mercdream.databinding.FragmentListBinding
 import com.baszczyk.mercdream.logging.LoggingFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class ListFragment : Fragment() {
@@ -40,34 +43,55 @@ class ListFragment : Fragment() {
 
         binding.listViewModel = listViewModel
 
+        val userId = activity?.intent?.extras?.get("id").toString().toLong()
 
-        val adapter = PiggyBankAdapter()
+
+        val adapter = PiggyBankAdapter(PiggyBankListener { piggyId ->
+            listViewModel.onPiggyBankClicked(piggyId)
+        })
         binding.piggyList.adapter = adapter
 
-        listViewModel.allPiggies(1)
 
-        binding.fab.setOnClickListener{view: View ->
-            view.findNavController().navigate(R.id.action_listFragment_to_formFragment)}
+        listViewModel.allPiggies(userId)
 
+        Handler().postDelayed({
+            if(listViewModel.piggies.value?.isEmpty()!!){
+                binding.nonePiggies.visibility = View.VISIBLE
 
-        //val manager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-        //binding.piggyList.layoutManager = manager
-
-            listViewModel.piggies.observe(viewLifecycleOwner, Observer {
-                it?.let {
-                    adapter.data = it
+                binding.addNewPiggyButton.setOnClickListener{view: View ->
+                    view.findNavController().navigate(ListFragmentDirections.actionListFragmentToFormFragment())
                 }
-            })
+            } else {
+                binding.fab.setOnClickListener { view: View ->
+                    view.findNavController().navigate(R.id.action_listFragment_to_formFragment)
+                }
 
-            binding.lifecycleOwner = this
+                val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+                binding.piggyList.layoutManager = manager
 
+                listViewModel.piggies.observe(viewLifecycleOwner, Observer {
+                    it?.let {
+                        adapter.submitList(it)
+                    }
+                })
 
+                binding.lifecycleOwner = this
 
+                listViewModel.navigateToPiggyBankFragment.observe(this, Observer { piggy ->
+                    piggy?.let {
 
+                        this.findNavController().navigate(
+                            ListFragmentDirections.actionListFragmentToPiggyBankFragment(piggy)
+                        )
+                        listViewModel.onPiggyBankNavigated()
+                    }
+                })
+            }
 
-
+        }, 500)
 
 
         return binding.root
     }
+
 }

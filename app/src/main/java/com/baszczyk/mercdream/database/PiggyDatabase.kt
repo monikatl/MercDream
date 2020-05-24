@@ -5,10 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.CoroutineScope
+import com.baszczyk.mercdream.database.enities.Deposit
+import com.baszczyk.mercdream.database.enities.Mercedes
+import com.baszczyk.mercdream.database.enities.PiggyBank
+import com.baszczyk.mercdream.database.enities.User
 
 @Database(entities = [PiggyBank::class, Mercedes::class, Deposit::class, User::class],
-version = 6, exportSchema = false)
+version = 11, exportSchema = false)
 abstract class PiggyDatabase : RoomDatabase() {
 
     abstract val piggyDatabaseDao: PiggyDatabaseDao

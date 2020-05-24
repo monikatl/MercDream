@@ -1,14 +1,17 @@
 package com.baszczyk.mercdream.user
 
 import android.app.Application
+import android.widget.EditText
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.baszczyk.mercdream.database.PiggyDatabaseDao
-import com.baszczyk.mercdream.database.User
+import com.baszczyk.mercdream.database.enities.User
 import kotlinx.coroutines.*
 
 class AddNewUserViewModel(val database: PiggyDatabaseDao,
 application: Application) : AndroidViewModel(application) {
+
+
 
     private var viewModelJob = Job()
 
@@ -40,9 +43,5 @@ application: Application) : AndroidViewModel(application) {
             var user = database.getCurrentUser()
             user
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
     }
 }

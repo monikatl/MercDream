@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="addNewUserViewModel"-->
-<!--            type="com.baszczyk.mercdream.user.AddNewUserViewModel" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="addNewUserViewModel"
+            type="com.baszczyk.mercdream.user.AddNewUserViewModel" />
+    </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="184dp"
             android:ems="10"
+            android:hint="login"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +31,9 @@
             android:id="@+id/new_user_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
+            android:hint="hasło"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +43,9 @@
             android:id="@+id/add_user_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
+            android:hint="e-mail"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +55,15 @@
             android:id="@+id/create_user_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:text="UTWORZ"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/roundbutton2"
             android:enabled="false"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="UTWORZ"
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_user_email" />
     </androidx.constraintlayout.widget.ConstraintLayout>
