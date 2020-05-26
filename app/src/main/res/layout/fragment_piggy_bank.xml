@@ -116,10 +116,12 @@
             android:layout_marginTop="64dp"
             android:background="@drawable/roundbutton"
             android:src="@drawable/mercedes_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_amount" />
+            app:layout_constraintTop_toBottomOf="@+id/input_amount"
+            app:layout_constraintVertical_bias="0.131" />
 
         <TextView
             android:id="@+id/from"
@@ -141,6 +143,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.283"
             app:layout_constraintStart_toEndOf="@+id/from" />
+
+        <ImageView
+            android:id="@+id/piggy_picture"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginBottom="196dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.525"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/piggy"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/piggy_picture_done"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginBottom="196dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/piggi_done"
+            android:alpha="0.4"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -46,6 +46,13 @@
             android:id="@+id/action_piggyBankFragment_to_historyFragment"
             app:destination="@id/historyFragment"
             app:popUpTo="@id/piggyBankFragment" />
+        <action
+            android:id="@+id/action_piggyBankFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
+        <action
+            android:id="@+id/action_piggyBankFragment_self"
+            app:destination="@id/piggyBankFragment"
+            app:popUpTo="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -60,5 +67,9 @@
             app:popUpTo="@id/piggyBankFragment"
             app:popUpToInclusive="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.baszczyk.mercdream.more.MoreFragment"
+        android:label="MoreFragment" />
 
 </navigation>

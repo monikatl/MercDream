@@ -57,8 +57,4 @@ class LoggingViewModel (val database: PiggyDatabaseDao,
             password
         }
     }
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

@@ -12,22 +12,7 @@ import com.baszczyk.mercdream.databinding.ItemViewBinding
 
 class PiggyBankAdapter(val clickListener: PiggyBankListener): ListAdapter<PiggyBank, PiggyBankAdapter.ViewHolder>(PiggyBankDiffCallback()){
 
-//    var piggyId = 0L
-//
-////    var data = listOf<PiggyBank>()
-////        set(value) {
-////            field = value
-////            notifyDataSetChanged()
-////        }
-////
-//   override fun getItemCount() = data.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val item = data[position]
-//        piggyId = item.piggyId
-//        val res = holder.itemView.context.resources
-//        holder.surname.text = item.piggyName
-//        holder.amount.text = item.actualAmount.toString()
 
         holder.bind(getItem(position)!!, clickListener)
     }
@@ -62,11 +47,7 @@ class PiggyBankAdapter(val clickListener: PiggyBankListener): ListAdapter<PiggyB
                 return ViewHolder(binding)
             }
         }
-//        val surname: TextView = itemView.findViewById(R.id.surname_mercedes)
-//        val amount: TextView = itemView.findViewById(R.id.actual_amount)
     }
-
-
 }
 
 class PiggyBankListener(val clickListener: (id: Long) -> Unit){

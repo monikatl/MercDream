@@ -13,10 +13,6 @@ class HistoryViewModel (val database: PiggyDatabaseDao,
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-
-    var isPiggyHistory = false
-
     var deposits = MutableLiveData<List<Deposit>>()
 
     private suspend fun getAllPiggyDeposits(id: Long): List<Deposit>{

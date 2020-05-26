@@ -56,10 +56,10 @@ interface PiggyDatabaseDao {
     @Query("UPDATE piggy SET actual_amount= :amount WHERE piggyId = :id")
     fun updatePiggyBank(amount: Double, id: Long)
 
-    @Query("SELECT * FROM deposit WHERE mercedes_id = :id")
+    @Query("SELECT * FROM deposit WHERE mercedes_id = :id ORDER BY deposit_id DESC")
     fun getAllDepositsForCurrentPiggy(id: Long): List<Deposit>
 
-    @Query("SELECT * FROM deposit WHERE user_id = :id")
+    @Query("SELECT * FROM deposit WHERE user_id = :id ORDER BY deposit_id DESC")
     fun getAllDeposits(id: Long): List<Deposit>
 
     @Query("DELETE FROM piggy WHERE piggyId= :id")

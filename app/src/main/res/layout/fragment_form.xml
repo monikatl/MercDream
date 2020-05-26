@@ -33,9 +33,10 @@
             android:layout_gravity="center"
             android:ems="5"
             android:hint="S600"
-            android:textSize="25dp"
             android:textColor="@color/colorAccent"
+            android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/surnameText"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -59,6 +60,7 @@
             android:textColor="@color/colorAccent"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/priceText"
             app:layout_constraintTop_toBottomOf="@+id/surnameInput" />
 
         <Button
@@ -114,9 +116,10 @@
             android:layout_marginTop="72dp"
             android:ems="10"
             android:hint="5000"
-            android:textColor="@color/colorAccent"
             android:inputType="number"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/capacityText"
             app:layout_constraintTop_toBottomOf="@+id/versionInput" />
 
         <EditText
@@ -126,9 +129,10 @@
             android:layout_marginTop="72dp"
             android:ems="10"
             android:hint="W220"
-            android:textColor="@color/colorAccent"
             android:inputType="textPersonName"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/versionText"
             app:layout_constraintTop_toBottomOf="@+id/priceInput" />
 
         <EditText
@@ -138,9 +142,10 @@
             android:layout_marginTop="72dp"
             android:ems="10"
             android:hint="525"
-            android:textColor="@color/colorAccent"
             android:inputType="number"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/powerText"
             app:layout_constraintTop_toBottomOf="@+id/capacityInput" />
 
 

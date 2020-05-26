@@ -42,6 +42,4 @@ class ListViewModel(
     fun onPiggyBankNavigated() {
         _navigateToPiggyBankFragment.value = null
     }
-
-
 }

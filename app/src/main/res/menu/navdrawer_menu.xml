@@ -17,6 +17,6 @@
         android:title="@string/add_new_piggy" />
     <item
         android:id="@+id/logout"
-        android:icon="@drawable/mercedes_logo"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="Wyloguj" />
 </menu>

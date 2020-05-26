@@ -23,11 +23,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class ListFragment : Fragment() {
 
+    private lateinit var binding: FragmentListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentListBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_list, container, false
         )
 
@@ -39,7 +41,8 @@ class ListFragment : Fragment() {
 
         val listViewModel =
             ViewModelProviders.of(
-                this, viewModelFactory).get(ListViewModel::class.java)
+                this, viewModelFactory
+            ).get(ListViewModel::class.java)
 
         binding.listViewModel = listViewModel
 
@@ -53,18 +56,17 @@ class ListFragment : Fragment() {
 
 
         listViewModel.allPiggies(userId)
+        fabButtonActive()
 
         Handler().postDelayed({
-            if(listViewModel.piggies.value?.isEmpty()!!){
+            if (listViewModel.piggies.value?.isEmpty()!!) {
                 binding.nonePiggies.visibility = View.VISIBLE
 
-                binding.addNewPiggyButton.setOnClickListener{view: View ->
-                    view.findNavController().navigate(ListFragmentDirections.actionListFragmentToFormFragment())
+                binding.addNewPiggyButton.setOnClickListener { view: View ->
+                    view.findNavController()
+                        .navigate(ListFragmentDirections.actionListFragmentToFormFragment())
                 }
             } else {
-                binding.fab.setOnClickListener { view: View ->
-                    view.findNavController().navigate(R.id.action_listFragment_to_formFragment)
-                }
 
                 val manager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
                 binding.piggyList.layoutManager = manager
@@ -87,11 +89,14 @@ class ListFragment : Fragment() {
                     }
                 })
             }
-
         }, 500)
-
 
         return binding.root
     }
 
+    private fun fabButtonActive() {
+        binding.fab.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_listFragment_to_formFragment)
+        }
+    }
 }

@@ -1,18 +1,21 @@
 package com.baszczyk.mercdream.form
 
 
-
+import android.app.*
+import android.app.NotificationManager
 import android.content.DialogInterface
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.text.Editable
-import android.text.TextWatcher
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -21,9 +24,10 @@ import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.enities.Mercedes
 import com.baszczyk.mercdream.database.enities.PiggyBank
 import com.baszczyk.mercdream.database.PiggyDatabase
-import com.baszczyk.mercdream.database.enities.User
+
 import com.baszczyk.mercdream.databinding.FragmentFormBinding
-import kotlinx.android.synthetic.main.fragment_form.*
+//import com.baszczyk.mercdream.notifications.sendNotification
+
 
 class FormFragment : Fragment() {
 
@@ -73,6 +77,15 @@ class FormFragment : Fragment() {
 
        binding.setLifecycleOwner(this)
 
+//        createChannel(getString(R.string.piggy_notification_chanel_id),
+//            getString(R.string.piggy_notification_channel_name))
+//
+//        val notificationManager = ContextCompat.getSystemService(
+//            app,
+//            NotificationManager::class.java
+//        ) as NotificationManager
+//        notificationManager.sendNotification(app.getString(R.string.timer_running), app)
+
         return binding.root
     }
 
@@ -108,4 +121,26 @@ class FormFragment : Fragment() {
         }
         builder?.show()
     }
+
+//    private fun createChannel(channelId: String, channelName: String) {
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val notificationChannel = NotificationChannel(
+//                channelId,
+//                channelName,
+//                NotificationManager.IMPORTANCE_LOW
+//            )
+//
+//            notificationChannel.enableLights(true)
+//            notificationChannel.lightColor = Color.RED
+//            notificationChannel.enableVibration(true)
+//            notificationChannel.description = "Utworzyłes nowa Skarbonke, wrzuc cos do niej!"
+//
+//            val notificationManager = requireActivity().getSystemService(
+//                NotificationManager::class.java
+//            )
+//            notificationManager.createNotificationChannel(notificationChannel)
+//        }
+
+//}
 }
