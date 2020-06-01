@@ -34,9 +34,7 @@ class ListFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
-
         val viewModelFactory = ListViewModelFactory(dataSource, application)
 
         val listViewModel =
@@ -52,6 +50,7 @@ class ListFragment : Fragment() {
         val adapter = PiggyBankAdapter(PiggyBankListener { piggyId ->
             listViewModel.onPiggyBankClicked(piggyId)
         })
+
         binding.piggyList.adapter = adapter
 
 

@@ -57,18 +57,13 @@ class PiggyBankFragment : Fragment() {
 
         Handler().postDelayed({
             piggyBankViewModel.mercedesGet(piggyBankViewModel.piggy.value?.mercedesId!!)
+
             Handler().postDelayed({
                 piggy = piggyBankViewModel.piggy.value!!
                 mercedes = piggyBankViewModel.mercedes.value!!
 
-                binding.apply {
-                    piggyName.text = mercedes.surname
-                    version.text = mercedes.version
-                    capacity.text = mercedes.engineCapacity
-                    horses.text = mercedes.powerEngine
-                    amount.text = piggy.actualAmount.toString()
-                    price.text = mercedes.price.toString()
-                }
+                binding.mercedes = mercedes
+                binding.piggy =piggy
 
                 if(piggy.actualAmount <= 0.0){
                     binding.inputAmount.visibility = View.GONE
@@ -110,7 +105,6 @@ class PiggyBankFragment : Fragment() {
             }
 
         }
-
         setHasOptionsMenu(true)
         return binding.root
     }

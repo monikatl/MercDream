@@ -35,7 +35,6 @@ class FormFragment : Fragment() {
     lateinit var piggy: PiggyBank
     lateinit var formViewModel: FormViewModel
     lateinit var binding: FragmentFormBinding
-    lateinit var price: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,

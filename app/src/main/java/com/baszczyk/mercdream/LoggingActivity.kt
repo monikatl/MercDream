@@ -22,5 +22,7 @@ class LoggingActivity : AppCompatActivity() {
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         binding = DataBindingUtil.setContentView( this , R.layout.activity_logging)
+
+
     }
 }
