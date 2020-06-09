@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.baszczyk.mercdream.ExtrasMessages
 
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.enities.Mercedes
@@ -91,7 +92,7 @@ class FormFragment : Fragment() {
     private fun createPiggy(){
         val mercId = formViewModel.currentMercedes.value!!
         val mercSurname = mercedes.surname
-        val userId = activity?.intent?.extras?.get("id").toString().toLong()
+        val userId = activity?.intent?.extras?.get(ExtrasMessages.USER_ID).toString().toLong()
         piggy = PiggyBank(
             mercedesId = mercId,
             piggyName = mercSurname,
