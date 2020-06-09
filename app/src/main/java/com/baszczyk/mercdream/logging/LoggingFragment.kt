@@ -18,6 +18,7 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.baszczyk.mercdream.ExtrasMessages
 import com.baszczyk.mercdream.MainActivity
 
 import com.baszczyk.mercdream.R
@@ -72,7 +73,7 @@ class LoggingFragment : Fragment() {
                         Handler().postDelayed({
                             val userId = viewModel.currentUser.value!!.userId.toString()
                             val intent = Intent(activity, MainActivity::class.java).apply {
-                                putExtra("id", userId)
+                                putExtra(ExtrasMessages.USER_ID, userId)
                             }
                             activity?.startActivity(intent)
 

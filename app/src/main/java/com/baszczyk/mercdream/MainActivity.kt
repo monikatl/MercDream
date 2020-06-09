@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationUI.setupWithNavController(binding.navView, navController)
 
         navView.setNavigationItemSelectedListener(this)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

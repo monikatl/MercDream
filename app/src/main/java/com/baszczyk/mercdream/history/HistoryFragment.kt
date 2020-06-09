@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.baszczyk.mercdream.ExtrasMessages
 
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
@@ -52,22 +53,22 @@ class HistoryFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        activity?.intent?.putExtra("isPiggy", false)
+        activity?.intent?.putExtra(ExtrasMessages.IS_PIGGY, false)
     }
 
     override fun onResume() {
         super.onResume()
 
-        val args = activity?.intent?.extras?.get("isPiggy").toString().toBoolean()
+        val args = activity?.intent?.extras?.get(ExtrasMessages.IS_PIGGY).toString().toBoolean()
         isPiggyHistory = args
 
         // OptionsMenu
         if(isPiggyHistory) {
-            val piggyId = activity?.intent?.extras?.get("piggyId")
+            val piggyId = activity?.intent?.extras?.get(ExtrasMessages.PIGGY_ID)
             historyViewModel.piggyDeposits(piggyId.toString().toLong())
         } else if(!isPiggyHistory) {
             //DrawerMenu
-            val userId = activity?.intent?.extras?.get("id").toString().toLong()
+            val userId = activity?.intent?.extras?.get(ExtrasMessages.USER_ID).toString().toLong()
             historyViewModel.allDeposits(userId)
         }
     }

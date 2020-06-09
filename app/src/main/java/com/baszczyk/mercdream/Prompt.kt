@@ -17,9 +17,6 @@ class Prompt (lifecycle: Lifecycle): LifecycleObserver{
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun showBackUpToast(){
-        if(counter > 0){
-            Timber.i("Witaj spowrotem!")
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

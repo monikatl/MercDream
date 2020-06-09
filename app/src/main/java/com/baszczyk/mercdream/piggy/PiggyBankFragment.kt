@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.baszczyk.mercdream.ExtrasMessages
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.enities.Deposit
 import com.baszczyk.mercdream.database.enities.Mercedes
@@ -53,7 +54,7 @@ class PiggyBankFragment : Fragment() {
         val piggyId = args.piggyId
 
         piggyBankViewModel.piggyGet(piggyId)
-        activity?.intent?.putExtra("piggyId", piggyId)
+        activity?.intent?.putExtra(ExtrasMessages.PIGGY_ID, piggyId)
 
         Handler().postDelayed({
             piggyBankViewModel.mercedesGet(piggyBankViewModel.piggy.value?.mercedesId!!)
@@ -73,6 +74,7 @@ class PiggyBankFragment : Fragment() {
             }, 500)
 
         }, 500)
+
 
         binding.imageButton.setOnClickListener {
             val dateTime = getCurrentDateTime().toString()
@@ -165,7 +167,7 @@ class PiggyBankFragment : Fragment() {
 
         when(item.itemId ){
             R.id.delete -> {showDeleteDialog()}
-            R.id.historyFragment -> { activity?.intent?.putExtra("isPiggy", true)
+            R.id.historyFragment -> { activity?.intent?.putExtra(ExtrasMessages.IS_PIGGY, true)
                 NavigationUI.onNavDestinationSelected(item, view!!.findNavController())}
             R.id.moreFragment -> {NavigationUI.onNavDestinationSelected(item, view!!.findNavController())}
         }

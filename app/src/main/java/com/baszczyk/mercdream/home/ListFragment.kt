@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.baszczyk.mercdream.ExtrasMessages
 
 import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
@@ -44,7 +45,7 @@ class ListFragment : Fragment() {
 
         binding.listViewModel = listViewModel
 
-        val userId = activity?.intent?.extras?.get("id").toString().toLong()
+        val userId = activity?.intent?.extras?.get(ExtrasMessages.USER_ID).toString().toLong()
 
 
         val adapter = PiggyBankAdapter(PiggyBankListener { piggyId ->

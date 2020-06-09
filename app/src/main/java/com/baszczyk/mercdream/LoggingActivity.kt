@@ -23,6 +23,5 @@ class LoggingActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView( this , R.layout.activity_logging)
 
-
     }
 }
