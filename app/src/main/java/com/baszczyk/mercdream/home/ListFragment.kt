@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,6 +21,7 @@ import com.baszczyk.mercdream.database.PiggyDatabase
 import com.baszczyk.mercdream.databinding.FragmentListBinding
 import com.baszczyk.mercdream.logging.LoggingFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 
 
 class ListFragment : Fragment() {
@@ -54,11 +56,12 @@ class ListFragment : Fragment() {
 
         binding.piggyList.adapter = adapter
 
+        runBlocking {
+            listViewModel.allPiggies(userId)
+        }
 
-        listViewModel.allPiggies(userId)
         fabButtonActive()
 
-        Handler().postDelayed({
             if (listViewModel.piggies.value?.isEmpty()!!) {
                 binding.nonePiggies.visibility = View.VISIBLE
 
@@ -89,7 +92,6 @@ class ListFragment : Fragment() {
                     }
                 })
             }
-        }, 500)
 
         return binding.root
     }

@@ -20,6 +20,7 @@ import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
 import com.baszczyk.mercdream.database.enities.User
 import com.baszczyk.mercdream.databinding.AddNewUserFragmentBinding
+import kotlinx.coroutines.runBlocking
 
 
 class AddNewUserFragment : Fragment() {
@@ -61,10 +62,10 @@ class AddNewUserFragment : Fragment() {
             newPassword = binding.newUserPassword
             email = binding.addUserEmail
 
-            viewModel.addNewUser(createNewUser())
-            viewModel.getNewUser()
-
-            Handler().postDelayed({
+            runBlocking {
+                viewModel.addNewUser(createNewUser())
+                viewModel.getNewUser()
+            }
 
                 Toast.makeText(
                     this.context,
@@ -73,8 +74,6 @@ class AddNewUserFragment : Fragment() {
                 ).show()
 
                 view.findNavController().navigate(R.id.action_addNewUserFragment_to_loggingFragment)
-
-            }, 500)
         }
         return binding.root
     }

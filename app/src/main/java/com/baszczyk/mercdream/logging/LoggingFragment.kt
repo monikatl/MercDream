@@ -26,6 +26,7 @@ import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
 
 import com.baszczyk.mercdream.databinding.FragmentLoggingBinding
+import kotlinx.coroutines.runBlocking
 
 
 class LoggingFragment : Fragment() {
@@ -65,25 +66,22 @@ class LoggingFragment : Fragment() {
             userPassword = binding.userPassword
 
             if(isUserInDatabase()){
-                viewModel.getUserPassword(userName.text.toString())
-                Handler().postDelayed({
+                runBlocking {
+                    viewModel.getUserPassword(userName.text.toString())
+                }
                     if(isCorrectPassword()) {
-                        viewModel.getUser(userName.text.toString())
 
-                        Handler().postDelayed({
+                        runBlocking {
+                            viewModel.getUser(userName.text.toString())
+                        }
                             val userId = viewModel.currentUser.value!!.userId.toString()
                             val intent = Intent(activity, MainActivity::class.java).apply {
                                 putExtra(ExtrasMessages.USER_ID, userId)
                             }
                             activity?.startActivity(intent)
-
-                        }, 500)
                     } else {
                         binding.wrongData.text = "Niepoprawne hasło!"
                     }
-
-                }, 500)
-
             }else {
                 view.findNavController().navigate(R.id.action_loggingFragment_to_addNewUserFragment)
             }

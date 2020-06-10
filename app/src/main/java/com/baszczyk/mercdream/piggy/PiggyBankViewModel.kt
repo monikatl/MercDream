@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 class PiggyBankViewModel (dataSource: PiggyDatabaseDao, application: Application) : ViewModel(){
 
     val database = dataSource
-    private var viewModelJob = Job()
+    var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val piggy = MutableLiveData<PiggyBank>()
@@ -23,10 +23,8 @@ class PiggyBankViewModel (dataSource: PiggyDatabaseDao, application: Application
         }
     }
 
-    fun piggyGet(id: Long){
-        uiScope.launch {
+   suspend fun piggyGet(id: Long) {
             piggy.value = getPiggy(id)
-        }
     }
 
 
@@ -38,10 +36,8 @@ class PiggyBankViewModel (dataSource: PiggyDatabaseDao, application: Application
         }
     }
 
-    fun mercedesGet(id: Long){
-        uiScope.launch {
+    suspend fun mercedesGet(id: Long){
             mercedes.value = getMercedes(id)
-        }
     }
 
 

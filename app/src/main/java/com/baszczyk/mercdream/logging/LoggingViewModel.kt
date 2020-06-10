@@ -16,10 +16,8 @@ class LoggingViewModel (val database: PiggyDatabaseDao,
 
     var currentUser = MutableLiveData<User?>()
 
-    fun getUser(name: String){
-        uiScope.launch {
+    suspend fun getUser(name: String){
             currentUser.value = getCurrentUser(name)
-        }
     }
 
     private suspend fun getCurrentUser(name: String): User?{
@@ -45,10 +43,8 @@ class LoggingViewModel (val database: PiggyDatabaseDao,
 
     lateinit var userPassword: String
 
-    fun getUserPassword(name: String){
-        uiScope.launch {
+    suspend fun getUserPassword(name: String){
             userPassword = getPassword(name)
-        }
     }
 
     private suspend fun getPassword(name: String):String{

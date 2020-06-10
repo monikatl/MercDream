@@ -12,11 +12,6 @@ class ListViewModel(
     application: Application) : ViewModel(){
 
     val database = dataSource
-
-    private var viewModelJob = Job()
-
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
     var piggies = MutableLiveData<List<PiggyBank>>()
 
     private suspend fun getAllPiggies(id: Long): List<PiggyBank>{
@@ -25,10 +20,8 @@ class ListViewModel(
         }
     }
 
-    fun allPiggies(id: Long){
-        uiScope.launch {
+    suspend fun allPiggies(id: Long){
             piggies.value = getAllPiggies(id)
-        }
     }
 
     private val _navigateToPiggyBankFragment = MutableLiveData<Long>()

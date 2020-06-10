@@ -13,21 +13,15 @@ class FormViewModel (
     val database: PiggyDatabaseDao,
     application: Application) : AndroidViewModel(application){
 
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-     suspend fun insertMercedes(mercedes: Mercedes){
+    private suspend fun insertMercedes(mercedes: Mercedes){
         withContext(Dispatchers.IO) {
             database.insertMercedes(mercedes)
         }
     }
 
-    fun addMercedes(mercedes: Mercedes){
-        uiScope.launch {
+    suspend fun addMercedes(mercedes: Mercedes){
             insertMercedes(mercedes)
-        }
     }
-
 
     var currentMercedes = MutableLiveData<Long?>()
 
@@ -38,12 +32,9 @@ class FormViewModel (
         }
     }
 
-    fun mercedesId(){
-        uiScope.launch {
+    suspend fun mercedesId(){
             currentMercedes.value = getMercedesId()
-        }
     }
-
 
      private suspend fun insertPiggyBank(piggyBank: PiggyBank){
         withContext(Dispatchers.IO) {
@@ -51,10 +42,8 @@ class FormViewModel (
         }
     }
 
-    fun addPiggyBank(piggyBank: PiggyBank){
-        uiScope.launch {
+    suspend fun addPiggyBank(piggyBank: PiggyBank){
             insertPiggyBank(piggyBank)
-        }
     }
 
 

@@ -33,7 +33,6 @@ class HistoryViewModel (val database: PiggyDatabaseDao,
             val deposit = database.getAllDeposits(id)
             deposit
         }
-
     }
 
     fun allDeposits(id: Long){

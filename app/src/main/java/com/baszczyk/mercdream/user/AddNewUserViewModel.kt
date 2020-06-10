@@ -14,7 +14,6 @@ application: Application) : AndroidViewModel(application) {
 
 
     private var viewModelJob = Job()
-
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
@@ -24,18 +23,14 @@ application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun addNewUser(user: User){
-        uiScope.launch {
+    suspend fun addNewUser(user: User){
             insertNewUser(user)
-        }
     }
 
     var currentUser = MutableLiveData<User>()
 
-    fun getNewUser() {
-        uiScope.launch {
+    suspend fun getNewUser() {
             currentUser.value = getCurrentUser()
-        }
     }
 
     private suspend fun getCurrentUser(): User {

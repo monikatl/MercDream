@@ -27,6 +27,8 @@ import com.baszczyk.mercdream.database.enities.PiggyBank
 import com.baszczyk.mercdream.database.PiggyDatabase
 
 import com.baszczyk.mercdream.databinding.FragmentFormBinding
+import kotlinx.coroutines.runBlocking
+
 //import com.baszczyk.mercdream.notifications.sendNotification
 
 
@@ -58,23 +60,16 @@ class FormFragment : Fragment() {
 
         binding.nextButton.setOnClickListener { view: View ->
             this.createMercedes()
-            formViewModel.addMercedes(mercedes)
 
-            Handler().postDelayed({
+            runBlocking {
+                formViewModel.addMercedes(mercedes)
                 formViewModel.mercedesId()
-                Handler().postDelayed({
-                    createPiggy()
-                    formViewModel.addPiggyBank(piggy)
-                    Handler().postDelayed({
-                        showDialog()
-                        view.findNavController().navigate(R.id.action_formFragment_to_listFragment)
-                    }, 500)
-
-                }, 500)
-
-            }, 500)
+                createPiggy()
+                formViewModel.addPiggyBank(piggy)
+                showDialog()
+                view.findNavController().navigate(R.id.action_formFragment_to_listFragment)
+            }
         }
-
        binding.setLifecycleOwner(this)
 
 //        createChannel(getString(R.string.piggy_notification_chanel_id),
