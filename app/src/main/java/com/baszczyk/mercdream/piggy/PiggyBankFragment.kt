@@ -33,8 +33,6 @@ class PiggyBankFragment : Fragment() {
     private lateinit var piggy: PiggyBank
     private lateinit var mercedes: Mercedes
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +43,6 @@ class PiggyBankFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
         val viewModelFactory = PiggyBankViewModelFactory(dataSource, application)
 
@@ -66,7 +63,6 @@ class PiggyBankFragment : Fragment() {
 
             activity?.intent?.putExtra(ExtrasMessages.PIGGY_ID, piggyId)
 
-
             runBlocking {
                 piggyBankViewModel.mercedesGet(piggyBankViewModel.piggy.value?.mercedesId!!)
             }
@@ -80,7 +76,6 @@ class PiggyBankFragment : Fragment() {
                 binding.inputAmount.visibility = View.GONE
                 binding.piggyPictureDone.visibility = View.VISIBLE
             }
-
 
             binding.imageButton.setOnClickListener {
                 val dateTime = getCurrentDateTime().toString()
@@ -118,7 +113,6 @@ class PiggyBankFragment : Fragment() {
         }
             setHasOptionsMenu(true)
             return binding.root
-
     }
 
 

@@ -109,10 +109,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    fun showLogoutDialog(){
+    private fun showLogoutDialog(){
         val dialog = AlertDialog.Builder(this)
         dialog.setMessage("Czy chcesz sie wylogowac?")
-        dialog.setPositiveButton("TAK"){ dialogInterface: DialogInterface, i: Int ->
+        dialog.setPositiveButton("TAK"){ _: DialogInterface, _: Int ->
             intent = Intent(this@MainActivity, LoggingActivity::class.java1)
             startActivity(intent)
         }
