@@ -32,7 +32,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-
 @BindingAdapter("mercedesApiStatus")
 fun bindStatus(statusImageView: ImageView, status: MercedesApiStatus?) {
     when (status) {

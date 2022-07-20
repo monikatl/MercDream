@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         dialog.setMessage("Czy chcesz sie wylogowac?")
         dialog.setPositiveButton("TAK"){ _: DialogInterface, _: Int ->
             intent = Intent(this@MainActivity, LoggingActivity::class.java)
+            intent = Intent(this@MainActivity, LoggingActivity::class.java)
             startActivity(intent)
         }
         dialog.show()

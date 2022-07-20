@@ -44,7 +44,6 @@ class PiggyBankFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
         val viewModelFactory = PiggyBankViewModelFactory(dataSource, application)
 
@@ -77,7 +76,6 @@ class PiggyBankFragment : Fragment() {
                 binding.inputAmount.visibility = View.GONE
                 binding.piggyPictureDone.visibility = View.VISIBLE
             }
-
 
             binding.imageButton.setOnClickListener {
                 val dateTime = getCurrentDateTime().toString()
@@ -115,7 +113,6 @@ class PiggyBankFragment : Fragment() {
         }
             setHasOptionsMenu(true)
             return binding.root
-
     }
 
 
