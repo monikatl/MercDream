@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
@@ -33,8 +34,6 @@ class PiggyBankFragment : Fragment() {
     private lateinit var piggy: PiggyBank
     private lateinit var mercedes: Mercedes
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,8 +48,7 @@ class PiggyBankFragment : Fragment() {
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
         val viewModelFactory = PiggyBankViewModelFactory(dataSource, application)
 
-        piggyBankViewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(PiggyBankViewModel::class.java)
+        piggyBankViewModel = ViewModelProvider(this, viewModelFactory)[PiggyBankViewModel::class.java]
 
         binding.piggyBankViewModel = piggyBankViewModel
 
@@ -65,7 +63,6 @@ class PiggyBankFragment : Fragment() {
         piggy = piggyBankViewModel.piggy.value!!
 
             activity?.intent?.putExtra(ExtrasMessages.PIGGY_ID, piggyId)
-
 
             runBlocking {
                 piggyBankViewModel.mercedesGet(piggyBankViewModel.piggy.value?.mercedesId!!)
@@ -178,8 +175,8 @@ class PiggyBankFragment : Fragment() {
         when(item.itemId ){
             R.id.delete -> {showDeleteDialog()}
             R.id.historyFragment -> { activity?.intent?.putExtra(ExtrasMessages.IS_PIGGY, true)
-                NavigationUI.onNavDestinationSelected(item, view!!.findNavController())}
-            R.id.moreFragment -> {NavigationUI.onNavDestinationSelected(item, view!!.findNavController())}
+                NavigationUI.onNavDestinationSelected(item, requireView().findNavController())}
+            R.id.moreFragment -> {NavigationUI.onNavDestinationSelected(item, requireView().findNavController())}
         }
         return super.onOptionsItemSelected(item)
     }

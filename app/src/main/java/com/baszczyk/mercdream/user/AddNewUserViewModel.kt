@@ -11,12 +11,6 @@ import kotlinx.coroutines.*
 class AddNewUserViewModel(val database: PiggyDatabaseDao,
 application: Application) : AndroidViewModel(application) {
 
-
-
-    private var viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-
     private suspend fun insertNewUser(user: User){
         withContext(Dispatchers.IO){
             database.insertNewUser(user)

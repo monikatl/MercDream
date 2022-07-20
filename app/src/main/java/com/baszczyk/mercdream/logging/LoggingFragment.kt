@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.baszczyk.mercdream.ExtrasMessages
@@ -48,12 +49,9 @@ class LoggingFragment : Fragment() {
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
         val viewModelFactory = LoggingViewModelFactory(dataSource, application)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoggingViewModel::class.java)
-
-        //binding.loggingViewModel = viewModel
+        viewModel = ViewModelProvider(this, viewModelFactory)[LoggingViewModel::class.java]
 
         viewModel.getAllUsersNames()
-
         userName = binding.userName
         userPassword = binding.userPassword
 
@@ -80,7 +78,7 @@ class LoggingFragment : Fragment() {
                             }
                             activity?.startActivity(intent)
                     } else {
-                        binding.wrongData.text = "Niepoprawne hasło!"
+                        binding.wrongData.text = getString(R.string.ircorrectPassword)
                     }
             }else {
                 view.findNavController().navigate(R.id.action_loggingFragment_to_addNewUserFragment)

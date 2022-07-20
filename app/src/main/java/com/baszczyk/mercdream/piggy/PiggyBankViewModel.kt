@@ -14,7 +14,6 @@ class PiggyBankViewModel (dataSource: PiggyDatabaseDao, application: Application
     val database = dataSource
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
     val piggy = MutableLiveData<PiggyBank>()
 
     private suspend fun getPiggy(id: Long): PiggyBank {

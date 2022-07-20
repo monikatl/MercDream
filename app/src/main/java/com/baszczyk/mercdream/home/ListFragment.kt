@@ -20,7 +20,6 @@ import com.baszczyk.mercdream.R
 import com.baszczyk.mercdream.database.PiggyDatabase
 import com.baszczyk.mercdream.databinding.FragmentListBinding
 import com.baszczyk.mercdream.logging.LoggingFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
 
@@ -82,11 +81,13 @@ class ListFragment : Fragment() {
 
                 binding.lifecycleOwner = this
 
-                listViewModel.navigateToPiggyBankFragment.observe(this, Observer { piggy ->
+                listViewModel.navigateToPiggyBankFragment.observe(viewLifecycleOwner, Observer { piggy ->
                     piggy?.let {
 
                         this.findNavController().navigate(
-                            ListFragmentDirections.actionListFragmentToPiggyBankFragment(piggy)
+                            ListFragmentDirections.actionListFragmentToPiggyBankFragment(
+                                piggy
+                            )
                         )
                         listViewModel.onPiggyBankNavigated()
                     }

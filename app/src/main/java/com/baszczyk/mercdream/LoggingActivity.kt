@@ -1,15 +1,12 @@
 package com.baszczyk.mercdream
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import com.baszczyk.mercdream.databinding.ActivityLoggingBinding
-import kotlinx.android.synthetic.main.fragment_logging.*
+
 
 class LoggingActivity : AppCompatActivity() {
 

@@ -11,7 +11,7 @@ import com.baszczyk.mercdream.database.enities.PiggyBank
 import com.baszczyk.mercdream.database.enities.User
 
 @Database(entities = [PiggyBank::class, Mercedes::class, Deposit::class, User::class],
-version = 11, exportSchema = false)
+version = 12, exportSchema = false)
 abstract class PiggyDatabase : RoomDatabase() {
 
     abstract val piggyDatabaseDao: PiggyDatabaseDao

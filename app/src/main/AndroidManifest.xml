@@ -19,6 +19,7 @@
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".WelcomeActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="nosensor">
             <intent-filter>

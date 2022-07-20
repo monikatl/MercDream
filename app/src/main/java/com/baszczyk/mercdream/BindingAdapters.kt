@@ -47,5 +47,6 @@ fun bindStatus(statusImageView: ImageView, status: MercedesApiStatus?) {
         MercedesApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
+        else -> {}
     }
 }

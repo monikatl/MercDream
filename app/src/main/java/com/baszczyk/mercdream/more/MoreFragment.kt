@@ -24,7 +24,7 @@ class MoreFragment : Fragment() {
     ): View? {
         val binding = FragmentMoreBinding.inflate(inflater)
 
-        binding.setLifecycleOwner (this)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         binding.photosGrid.adapter = PhotoGridAdapter()

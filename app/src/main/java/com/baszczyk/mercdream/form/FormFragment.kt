@@ -70,7 +70,7 @@ class FormFragment : Fragment() {
                 view.findNavController().navigate(R.id.action_formFragment_to_listFragment)
             }
         }
-       binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
 //        createChannel(getString(R.string.piggy_notification_chanel_id),
 //            getString(R.string.piggy_notification_channel_name))

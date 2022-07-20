@@ -13,6 +13,8 @@ import android.widget.EditText
 
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 
 
@@ -31,7 +33,6 @@ class AddNewUserFragment : Fragment() {
     private lateinit var newPassword: EditText
     private lateinit var email: EditText
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,7 +49,7 @@ class AddNewUserFragment : Fragment() {
         val dataSource = PiggyDatabase.getInstance(application).piggyDatabaseDao
         val viewModelFactory = AddNewUserViewModelFactory(dataSource, application)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddNewUserViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory)[AddNewUserViewModel::class.java]
 
         binding.addNewUserViewModel = viewModel
 

@@ -6,6 +6,7 @@
     <string name="piggy_list">Lista skarbonek</string>
     <string name="history">Historia wpłat</string>
     <string name="add_new_piggy">Dodaj nowa skarbonke</string>
+    <string name="ircorrectPassword">Niepoprawne hasło!</string>
 
 
 </resources>

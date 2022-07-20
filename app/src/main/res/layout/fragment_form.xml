@@ -148,7 +148,6 @@
             app:layout_constraintStart_toEndOf="@+id/powerText"
             app:layout_constraintTop_toBottomOf="@+id/capacityInput" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
